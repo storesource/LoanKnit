@@ -1,5 +1,7 @@
 package com.loanknit.controller;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -14,11 +16,14 @@ import com.fasterxml.jackson.databind.node.ObjectNode;
 
 @RestController
 public class WebhookController {
+	
+	private static final Logger LOGGER = LoggerFactory
+			.getLogger(WebhookController.class);
 
 	@PostMapping(value = "/webhook", consumes = MediaType.ALL_VALUE)
 	public ResponseEntity<String> webhookRequest(@RequestBody ObjectNode payload) {
 
-		System.out.println(payload.toString());
+		LOGGER.info("Payload: {}",payload);
 		return new ResponseEntity<>(HttpStatus.OK);
 	}
 
@@ -33,7 +38,7 @@ public class WebhookController {
 			if (mode.equals("subscribe") && verifyToken.equals(token))
 				return new ResponseEntity<>(challenge, HttpStatus.OK);
 		}
-		return new ResponseEntity<String>(HttpStatus.UNAUTHORIZED);
+		return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
 	}
 
 }
