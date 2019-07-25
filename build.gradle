@@ -15,5 +15,6 @@ repositories {
 
 dependencies {
 	compile ("org.springframework.boot:spring-boot-starter-web:2.1.6.RELEASE")
+	compile 'com.clivern:racter:1.0.4'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 }
